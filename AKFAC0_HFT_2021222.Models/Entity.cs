@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AKFAC0_HFT_2021222.Models
 {
-	internal class Entity : IEntity<int>
+	public abstract class Entity : IEntity<int>
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
