@@ -5,6 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Job.mdf" />
+    <None Remove="Job_log.ldf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Job.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Job_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AKFAC0_HFT_2021222.Models\AKFAC0_HFT_2021222.Models.csproj" />
   </ItemGroup>
 
