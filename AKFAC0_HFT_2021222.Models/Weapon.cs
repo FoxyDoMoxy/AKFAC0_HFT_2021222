@@ -12,7 +12,7 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Weapon : Entity
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Column("Weapon_id", TypeName = "int")]
 		public override int Id { get; set; }
 
@@ -27,5 +27,16 @@ namespace AKFAC0_HFT_2021222.Models
 		public int JobId { get; set; }
 		public virtual Job Job { get; set; }
 
+		public Weapon()
+		{
+
+		}
+		public Weapon(int id,string name,int baseDamage,int jobId)
+		{
+			this.Id=id;
+			this.Name = name;
+			this.BaseDamage = baseDamage;
+			this.JobId = jobId;
+		}
 	}
 }

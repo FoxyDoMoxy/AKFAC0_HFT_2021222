@@ -11,15 +11,13 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Armor : Entity
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Column("Armor_Id", TypeName = "int")]
 		public override int Id { get; set; }
 
 		[Required]
 		[StringLength(240)]
 		public string Name { get; set; }
-		[Required]
-		public int Level { get; set; }
 
 		[Required]
 		public int BaseDefense { get; set; }
@@ -27,5 +25,17 @@ namespace AKFAC0_HFT_2021222.Models
 		[ForeignKey(nameof(Job))]
 		public int JobId { get; set; }
 		public virtual Job Job { get; set; }
+
+		public Armor()
+		{
+
+		}
+		public Armor(int Id,string name, int baseDefense, int jobId)
+		{
+			this.Id = Id;
+			this.Name = name;
+			this.BaseDefense = baseDefense;
+			this.JobId = jobId;
+		}
 	}
 }
