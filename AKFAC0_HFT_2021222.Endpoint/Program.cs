@@ -1,3 +1,4 @@
+using AKFAC0_HFT_2021222.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,14 +14,19 @@ namespace AKFAC0_HFT_2021222.Endpoint
 	{
 		public static void Main(string[] args)
 		{
-			CreateHostBuilder(args).Build().Run();
+			//CreateHostBuilder(args).Build().Run();
+			JobDbContext ctx = new JobDbContext();
+
+			var jobs = ctx.Jobs.ToList();
+
+			;
 		}
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
-			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder =>
-				{
-					webBuilder.UseStartup<Startup>();
-				});
+		//public static IHostBuilder CreateHostBuilder(string[] args) =>
+		//	Host.CreateDefaultBuilder(args)
+		//		.ConfigureWebHostDefaults(webBuilder =>
+		//		{
+		//			webBuilder.UseStartup<Startup>();
+		//		});
 	}
 }
