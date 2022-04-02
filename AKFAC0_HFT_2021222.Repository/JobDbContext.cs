@@ -27,8 +27,13 @@ namespace AKFAC0_HFT_2021222.Repository
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
+				//MDF tesztelő
+				//optionsBuilder
+				//.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Foxy\source\repos\AKFAC0_HFT_2021222\AKFAC0_HFT_2021222.Repository\Job.mdf;Integrated Security=True")
+				//.UseLazyLoadingProxies();
+
 				optionsBuilder
-					.UseInMemoryDatabase(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Job.mdf;Integrated Security=True;MultipleActiveResultSets=True")
+					.UseInMemoryDatabase("JobDb")
 					.UseLazyLoadingProxies();
 			}
 		}
@@ -42,18 +47,12 @@ namespace AKFAC0_HFT_2021222.Repository
 			.HasForeignKey(Weapon => Weapon.JobId)
 			.OnDelete(DeleteBehavior.ClientSetNull));
 
-			//Weapon Navigation Property
+			//Armor Navigation Property
 			modelBuilder.Entity<Armor>(Armor => Armor
 			.HasOne(Armor => Armor.Job)
 			.WithMany(Job => Job.Armors)
 			.HasForeignKey(Armor => Armor.JobId)
 			.OnDelete(DeleteBehavior.ClientSetNull));
-
-			modelBuilder.Entity<Armor>(u =>
-			{
-				u.HasKey(b => b.Id);
-				u.Property(b => b.Id).ValueGeneratedOnAdd();
-			});
 
 			//DBSeed
 
