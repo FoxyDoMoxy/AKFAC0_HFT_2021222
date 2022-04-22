@@ -40,6 +40,7 @@ namespace AKFAC0_HFT_2021222.Repository
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			#region NP
 			//Weapon Navigation Property
 			modelBuilder.Entity<Weapon>(Weapon => Weapon
 			.HasOne(Weapon => Weapon.Job)
@@ -53,7 +54,7 @@ namespace AKFAC0_HFT_2021222.Repository
 			.WithMany(Job => Job.Armors)
 			.HasForeignKey(Armor => Armor.JobId)
 			.OnDelete(DeleteBehavior.ClientSetNull));
-
+			#endregion
 			//DBSeed
 
 			modelBuilder.Entity<Job>().HasData(new Job[]
