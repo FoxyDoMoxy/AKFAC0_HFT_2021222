@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AKFAC0_HFT_2021222.Repository.Repositories
 {
-	internal class WeaponRepository : Repository<Weapon>, IRepository<Weapon>
+	public class WeaponRepository : Repository<Weapon>, IRepository<Weapon>
 	{
 		public WeaponRepository(JobDbContext ctx) : base(ctx)
 		{
