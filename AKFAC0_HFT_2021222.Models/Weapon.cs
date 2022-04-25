@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AKFAC0_HFT_2021222.Models
@@ -25,6 +26,7 @@ namespace AKFAC0_HFT_2021222.Models
 
 		[ForeignKey(nameof(Job))]
 		public int JobId { get; set; }
+		[JsonIgnore]
 		public virtual Job Job { get; set; }
 
 		public Weapon()
