@@ -5,9 +5,7 @@ using AKFAC0_HFT_2021222.Repository;
 using AKFAC0_HFT_2021222.Repository.Interfaces;
 using AKFAC0_HFT_2021222.Repository.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +25,10 @@ namespace AKFAC0_HFT_2021222.Endpoint
 		{
 			Configuration = configuration;
 		}
+
 		public IConfiguration Configuration { get; }
+
+		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddTransient<JobDbContext>();
@@ -41,12 +42,10 @@ namespace AKFAC0_HFT_2021222.Endpoint
 			services.AddTransient<IArmorLogic, ArmorLogic>();
 
 			services.AddControllers();
-
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "AKFAC0_HFT_2021222.Endpoint", Version = "v1" });
 			});
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,15 +58,6 @@ namespace AKFAC0_HFT_2021222.Endpoint
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AKFAC0_HFT_2021222.Endpoint v1"));
 			}
 
-			app.UseExceptionHandler(c => c.Run(async context =>
-			{
-				var exception = context.Features
-					.Get<IExceptionHandlerPathFeature>()
-					.Error;
-				var response = new { Msg = exception.Message };
-				await context.Response.WriteAsJsonAsync(response);
-			}));
-
 			app.UseRouting();
 
 			app.UseAuthorization();
@@ -76,14 +66,6 @@ namespace AKFAC0_HFT_2021222.Endpoint
 			{
 				endpoints.MapControllers();
 			});
-
-			//app.UseEndpoints(endpoints =>
-			//{
-			//	endpoints.MapGet("/", async context =>
-			//	{
-			//		await context.Response.WriteAsync("Hello World!");
-			//	});
-			//});
 		}
 	}
 }
