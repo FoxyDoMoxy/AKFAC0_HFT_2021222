@@ -44,5 +44,21 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 		{
 			this.logic.Delete(id);
 		}
+		[HttpGet]
+		public IEnumerable<Weapon> GetAllJobWeapons(string job)
+		{
+			return this.logic.GetAllJobWeapons(job);
+		}
+		[HttpGet]
+		public double? GetAverageDamageByClass(string jobname)
+		{
+			return this.logic.GetAverageDamageByClass(jobname);
+		}
+		[HttpGet]
+		public double? GetAverageDamage()
+		{
+			return this.logic.GetAverageDamage();
+		}
+
 	}
 }

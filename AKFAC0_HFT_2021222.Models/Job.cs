@@ -27,7 +27,7 @@ namespace AKFAC0_HFT_2021222.Models
 		[JsonIgnore]
 		public virtual ICollection<Weapon> Weapons { get; set; }
 
-		[NotMapped]// Not sure?
+		[NotMapped]
 		[JsonIgnore]
 		public virtual ICollection<Armor> Armors { get; set; }
 

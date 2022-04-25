@@ -44,5 +44,26 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 		{
 			this.logic.Delete(id);
 		}
+
+		[HttpGet]
+		public IEnumerable<Job> GetAllJobsByRole(string role)
+		{
+			return this.logic.GetAllJobsByRole(role);
+		}
+		[HttpGet]
+		public IEnumerable<Weapon> GetAllWeaponByRole(string role)
+		{
+			return this.logic.GetAllWeaponByRole(role);
+		}
+		[HttpGet]
+		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string role, int dmg)
+		{
+			return this.logic.GetAllWeaponByRoleMinimumDmg(role, dmg);
+		}
+		[HttpGet]
+		public Weapon GetHighestDMGWeaponGivenRole(string role)
+		{
+			return this.logic.GetHighestDMGWeaponGivenRole(role);
+		}
 	}
 }

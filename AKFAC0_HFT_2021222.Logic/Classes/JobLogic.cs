@@ -97,7 +97,7 @@ namespace AKFAC0_HFT_2021222.Logic
 				.ReadAll()
 				.Where(x => x.Role == role)
 				.SelectMany(y => y.Weapons.Where(v => v.BaseDamage.Equals(y.Weapons.Max(d =>d.BaseDamage))))
-				.Select(x => x).First();
+				.Select(x => x).OrderByDescending(y => y.BaseDamage).First();
 			return res;
 
 		}
