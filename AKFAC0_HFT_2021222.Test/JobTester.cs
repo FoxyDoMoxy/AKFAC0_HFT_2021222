@@ -102,14 +102,5 @@ namespace AKFAC0_HFT_2021222.Test
 
 		}
 
-		[Test]
-		public void ReadTest()
-		{
-			Job result = joblogic.Read(1);
-
-			//Assert
-
-			Assert.That(result.Name, Is.EqualTo("BBBB"));
-		}
 	}
 }

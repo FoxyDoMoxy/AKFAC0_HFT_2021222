@@ -27,7 +27,7 @@ namespace AKFAC0_HFT_2021222.Test
 			mockArmorRepo = new Mock<IRepository<Armor>>();
 			mockArmorRepo.Setup(mr => mr.ReadAll()).Returns(new List<Armor>()
 			{
-				new Armor("AAAA",10,1),
+				new Armor("AAAA",100,1),
 				new Armor("BBBB",100,1),
 				new Armor("CCCC",1000,1),
 				new Armor("DDDD",0,1),
@@ -105,13 +105,15 @@ namespace AKFAC0_HFT_2021222.Test
 		}
 
 		[Test]
-		public void ReadTest()
+		public void GetAverageDefenseTest()
 		{
-			Armor result = ArmorLogic.Read(1);
+			var result = ArmorLogic.GetAverageDefence();
+
+			double expected = 300;
 
 			//Assert
 
-			Assert.That(result.Name, Is.EqualTo("BBBB"));
+			Assert.That(result, Is.EqualTo(expected));
 		}
 	}
 }
