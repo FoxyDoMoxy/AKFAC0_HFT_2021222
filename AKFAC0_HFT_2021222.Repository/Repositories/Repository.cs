@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AKFAC0_HFT_2021222.Repository.Repositories
 {
-	public class Repository<T> : IRepository<T> where T : Entity
+	public abstract class Repository<T> : IRepository<T> where T : class
 	{
 
 		protected JobDbContext ctx;
@@ -29,24 +29,13 @@ namespace AKFAC0_HFT_2021222.Repository.Repositories
 			ctx.SaveChanges();
 		}
 
-		public T Read(int id)
-		{
-			return ctx.Set<T>().FirstOrDefault(item => item.Id == id);
-		}
-
 		public IQueryable<T> ReadAll()
 		{
 			return ctx.Set<T>();
 		}
 
-		public void Update(T item)
-		{
-			var old = Read(item.Id);
-			foreach (var prop in old.GetType().GetProperties())
-			{
-				prop.SetValue(old, prop.GetValue(item));
-			}
-			ctx.SaveChanges();
-		}
+		public abstract T Read(int id);
+
+		public abstract void Update(T item);
 	}
 }
