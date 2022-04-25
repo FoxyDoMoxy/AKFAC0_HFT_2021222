@@ -52,7 +52,9 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 		// Non crud
 
-		public IEnumerable<Weapon> GetAllJobWeapons(string job)
+
+		// Returns all weapons of the specific job by name (többtáblás)
+		public IEnumerable<Weapon> GetAllJobWeapons(string job) 
 		{
 			return from x in this.repo.ReadAll()
 				   where x.Job.Name == job
@@ -64,13 +66,17 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 				   };
 		}
 
-		public double? GetAverageDamage()
-		{
-			return this.repo.ReadAll().Average(x => x.BaseDamage);
-		}
+		// Returns the average DMG of a specific job's weapons. (többtáblás)
 		public double? GetAverageDamageByClass(string jobname)
 		{
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDamage);
+		}
+
+
+		// Returns Average dmg of all weapon (nem többtáblás)
+		public double? GetAverageDamage()
+		{
+			return this.repo.ReadAll().Average(x => x.BaseDamage);
 		}
 	}
 }

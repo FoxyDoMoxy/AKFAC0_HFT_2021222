@@ -52,7 +52,8 @@ namespace AKFAC0_HFT_2021222.Logic
 
 		// Non crud
 
-		public IEnumerable<Job> GetAllJobsByRole(string role)
+		// Gives back all Jobs of the given role. (Nem többtáblás)
+		public IEnumerable<Job> GetAllJobsByRole(string role) 
 		{
 			return from x in this.repo.ReadAll()
 				   where x.Role == role
@@ -60,10 +61,47 @@ namespace AKFAC0_HFT_2021222.Logic
 				   {
 					   Name = x.Name,
 					   Role = x.Role,
-					   Armors = x.Armors,
-					   Weapons = x.Weapons,
+					   Armors = x.Armors.ToList(),
+					   Weapons = x.Weapons.ToList(),
 					   Id = x.Id
 				   };
 		}
+
+		//Gives back a collection of weapons belonging to a given role. (többtáblás)
+		public IEnumerable<Weapon> GetAllWeaponByRole(string role)
+		{
+			return (from x in this.repo.ReadAll()
+					where x.Role == role
+					select x.Weapons).SelectMany(y => y); ;
+
+		}
+
+		//Read the name maybe?? lol (többtáblás)
+		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string role,int dmg)
+		{
+
+			var res = repo
+				.ReadAll()
+				.Where(x => x.Role == role)
+				.SelectMany(y=>y.Weapons.Where( v=>v.BaseDamage>dmg))
+				.Select(x=>x);
+			return res;
+
+		}
+
+		// Name says it all  (többtáblás)
+		public Weapon GetHighestDMGWeaponGivenRole(string role)
+		{
+
+			var res = repo
+				.ReadAll()
+				.Where(x => x.Role == role)
+				.SelectMany(y => y.Weapons.Where(v => v.BaseDamage.Equals(y.Weapons.Max(d =>d.BaseDamage))))
+				.Select(x => x).First();
+			return res;
+
+		}
+
+
 	}
 }

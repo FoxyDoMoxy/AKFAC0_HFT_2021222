@@ -8,12 +8,13 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 	{
 		void Create(Armor item);
 		void Delete(int id);
-		IEnumerable<Armor> GetAllJobArmors(string job);
-		IEnumerable<Armor> GetAllJobWeapons(string job);
-		double? GetAverageDefence();
-		double? GetAverageDefenceByClass(string jobname);
 		Armor Read(int id);
 		IQueryable<Armor> ReadAll();
 		void Update(Armor item);
+
+		// non cruds
+		public IEnumerable<Armor> GetAllJobArmors(string job);//(többtáblás)
+		public double? GetAverageDefenceByClass(string jobname);//(többtáblás)
+		public double? GetAverageDefence();
 	}
 }

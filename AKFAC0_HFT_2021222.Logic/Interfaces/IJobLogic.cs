@@ -8,9 +8,15 @@ namespace AKFAC0_HFT_2021222.Logic
 	{
 		void Create(Job item);
 		void Delete(int id);
-		IEnumerable<Job> GetAllJobsByRole(string role);
 		Job Read(int id);
 		IQueryable<Job> ReadAll();
 		void Update(Job item);
+
+		// non cruds
+
+		public IEnumerable<Job> GetAllJobsByRole(string role);
+		public IEnumerable<Weapon> GetAllWeaponByRole(string role);//(többtáblás)
+		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string role, int dmg);//(többtáblás)
+		public Weapon GetHighestDMGWeaponGivenRole(string role); //(többtáblás)
 	}
 }

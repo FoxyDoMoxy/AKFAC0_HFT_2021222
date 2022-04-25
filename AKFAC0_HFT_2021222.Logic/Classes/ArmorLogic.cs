@@ -51,6 +51,8 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 
 		// Non crud
+
+		// Returns all armor of the specific job by name (többtáblás)
 		public IEnumerable<Armor> GetAllJobArmors(string job)
 		{
 			return from x in this.repo.ReadAll()
@@ -62,25 +64,17 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 					   BaseDefense = x.BaseDefense,
 				   };
 		}
-		public IEnumerable<Armor> GetAllJobWeapons(string job)
-		{
-			return from x in this.repo.ReadAll()
-				   where x.Job.Name == job
-				   select new Armor()
-				   {
-					   Id = x.Id,
-					   Name = x.Name,
-					   BaseDefense = x.BaseDefense,
-				   };
-		}
 
-		public double? GetAverageDefence()
-		{
-			return this.repo.ReadAll().Average(x => x.BaseDefense);
-		}
+		// Returns the average defense of a specific job's armors. (többtáblás)
 		public double? GetAverageDefenceByClass(string jobname)
 		{
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDefense);
+		}
+
+		//// Returns Average defense of all armor (nem többtáblás)
+		public double? GetAverageDefence()
+		{
+			return this.repo.ReadAll().Average(x => x.BaseDefense);
 		}
 	}
 }

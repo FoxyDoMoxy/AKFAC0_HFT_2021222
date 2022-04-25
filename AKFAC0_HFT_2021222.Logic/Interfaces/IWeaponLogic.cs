@@ -8,11 +8,14 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 	{
 		void Create(Weapon item);
 		void Delete(int id);
-		IEnumerable<Weapon> GetAllJobWeapons(string job);
-		double? GetAverageDamage();
-		double? GetAverageDamageByClass(string jobname);
 		Weapon Read(int id);
 		IQueryable<Weapon> ReadAll();
 		void Update(Weapon item);
+
+		// non cruds
+
+		public IEnumerable<Weapon> GetAllJobWeapons(string job);//(többtáblás)
+		public double? GetAverageDamageByClass(string jobname);//(többtáblás)
+		public double? GetAverageDamage();
 	}
 }
