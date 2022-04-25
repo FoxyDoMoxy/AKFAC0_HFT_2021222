@@ -12,8 +12,8 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Job : Entity
 	{
 		[Key]
-		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]   Valamiért nem szereti DBseedel :p
-		[Column("Job_id", TypeName = "int")]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]   //Valamiért nem szereti DBseedel :p
+		//[Column("Job_id", TypeName = "int")]
 		public override int Id { get; set; }
 
 		[Required]
@@ -39,6 +39,13 @@ namespace AKFAC0_HFT_2021222.Models
 		public Job(int id,string Name,string Role) :base()
 		{
 			this.Id = id;
+			this.Weapons = new HashSet<Weapon>();
+			this.Armors = new HashSet<Armor>();
+			this.Name = Name;
+			this.Role = Role;
+		}
+		public Job(string Name, string Role) : base()
+		{
 			this.Weapons = new HashSet<Weapon>();
 			this.Armors = new HashSet<Armor>();
 			this.Name = Name;

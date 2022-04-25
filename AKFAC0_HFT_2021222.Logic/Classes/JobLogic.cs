@@ -17,7 +17,17 @@ namespace AKFAC0_HFT_2021222.Logic
 		}
 		public void Create(Job item)
 		{
-			if (item.Name.Length < 3)
+			string[] accepted = new string[]
+			{
+				"TANK",
+				"HEALER",
+				"DPS"
+			};
+			if (!accepted.Contains(item.Role.ToUpper()) )
+			{
+				throw new ArgumentException("Job doesnt appeal to the requements");
+			}
+			else if (item.Name.Length < 3)
 			{
 				throw new ArgumentException("Job name is too short");
 			}

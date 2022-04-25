@@ -21,6 +21,10 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 			{
 				throw new ArgumentException("Job name is too short");
 			}
+			else if (item.Name.Contains('?'))
+			{
+
+			}
 			else
 				this.repo.Create(item);
 		}

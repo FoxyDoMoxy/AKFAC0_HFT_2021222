@@ -13,8 +13,8 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Weapon : Entity
 	{
 		[Key]
-		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		[Column("Weapon_id", TypeName = "int")]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//[Column("Weapon_id", TypeName = "int")]
 		public override int Id { get; set; }
 
 		[MaxLength(240)]
@@ -36,6 +36,12 @@ namespace AKFAC0_HFT_2021222.Models
 		public Weapon(int id,string name,int baseDamage,int jobId)
 		{
 			this.Id=id;
+			this.Name = name;
+			this.BaseDamage = baseDamage;
+			this.JobId = jobId;
+		}
+		public Weapon(string name, int baseDamage, int jobId)
+		{
 			this.Name = name;
 			this.BaseDamage = baseDamage;
 			this.JobId = jobId;

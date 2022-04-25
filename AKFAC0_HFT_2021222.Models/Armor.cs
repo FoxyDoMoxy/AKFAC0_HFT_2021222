@@ -12,8 +12,8 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Armor : Entity
 	{
 		[Key]
-		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		[Column("Armor_Id", TypeName = "int")]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//[Column("Armor_Id", TypeName = "int")]
 		public override int Id { get; set; }
 
 		[Required]
@@ -35,6 +35,12 @@ namespace AKFAC0_HFT_2021222.Models
 		public Armor(int Id,string name, int baseDefense, int jobId)
 		{
 			this.Id = Id;
+			this.Name = name;
+			this.BaseDefense = baseDefense;
+			this.JobId = jobId;
+		}
+		public Armor(string name, int baseDefense, int jobId)
+		{
 			this.Name = name;
 			this.BaseDefense = baseDefense;
 			this.JobId = jobId;
