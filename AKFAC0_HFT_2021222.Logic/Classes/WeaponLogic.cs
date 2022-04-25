@@ -19,7 +19,11 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		{
 			if (item.Name.Length < 3)
 			{
-				throw new ArgumentException("Job name is too short");
+				throw new ArgumentException("Weapon name is too short");
+			}
+			else if (item.Name.Contains('?'))
+			{
+
 			}
 			else
 				this.repo.Create(item);
