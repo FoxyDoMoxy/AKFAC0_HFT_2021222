@@ -17,16 +17,23 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 		public void Create(Armor item)
 		{
-			if (item.Name.Length < 3)
+			if (item.Name == "" && item.Name == null)
 			{
-				throw new ArgumentException("Armor name is too short");
-			}
-			else if (item.Name.Contains('?'))
-			{
-
+				throw new ArgumentNullException("Armor name cant be null");
 			}
 			else
-				this.repo.Create(item);
+			{
+				if (item.Name.Length < 3)
+				{
+					throw new ArgumentException("Armor name is too short");
+				}
+				else if (item.Name.Contains('?'))
+				{
+
+				}
+				else
+					this.repo.Create(item);
+			}
 		}
 
 		public void Delete(int id)

@@ -46,5 +46,13 @@ namespace AKFAC0_HFT_2021222.Models
 			this.BaseDamage = baseDamage;
 			this.JobId = jobId;
 		}
+
+		public Weapon(string name, int baseDamage, int jobId,Job job)
+		{
+			this.Name = name;
+			this.BaseDamage = baseDamage;
+			this.JobId = jobId;
+			this.Job = job;
+		}
 	}
 }

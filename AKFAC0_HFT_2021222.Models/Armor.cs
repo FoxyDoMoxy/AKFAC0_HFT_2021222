@@ -45,5 +45,12 @@ namespace AKFAC0_HFT_2021222.Models
 			this.BaseDefense = baseDefense;
 			this.JobId = jobId;
 		}
+		public Armor(string name, int baseDefense, int jobId,Job job)
+		{
+			this.Name = name;
+			this.BaseDefense = baseDefense;
+			this.JobId = jobId;
+			this.Job = job;
+		}
 	}
 }
