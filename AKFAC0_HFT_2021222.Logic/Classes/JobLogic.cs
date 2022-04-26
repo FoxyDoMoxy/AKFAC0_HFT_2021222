@@ -63,10 +63,10 @@ namespace AKFAC0_HFT_2021222.Logic
 		// Non crud
 
 		// Gives back all Jobs of the given role. (Nem többtáblás)
-		public IEnumerable<Job> GetAllJobsByRole(string role) 
+		public IEnumerable<Job> GetAllJobsByRole(string id) 
 		{
 			return from x in this.repo.ReadAll()
-				   where x.Role == role
+				   where x.Role == id
 				   select new Job
 				   {
 					   Name = x.Name,
@@ -78,21 +78,21 @@ namespace AKFAC0_HFT_2021222.Logic
 		}
 
 		//Gives back a collection of weapons belonging to a given role. (többtáblás)
-		public IEnumerable<Weapon> GetAllWeaponByRole(string role)
+		public IEnumerable<Weapon> GetAllWeaponByRole(string id)
 		{
 			return (from x in this.repo.ReadAll()
-					where x.Role == role
+					where x.Role == id
 					select x.Weapons).SelectMany(y => y); ;
 
 		}
 
 		//Read the name maybe?? lol (többtáblás)
-		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string role,int dmg)
+		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string id, int dmg)
 		{
 
 			var res = repo
 				.ReadAll()
-				.Where(x => x.Role == role)
+				.Where(x => x.Role == id)
 				.SelectMany(y=>y.Weapons.Where( v=>v.BaseDamage>dmg))
 				.Select(x=>x);
 			return res;

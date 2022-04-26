@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 {
-	[Route("api/[controller]/[action]")]
+	[Route("[controller]/[action]")]
 	[ApiController]
 	public class ArmorController : ControllerBase
 	{
@@ -21,7 +21,7 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			return this.logic.ReadAll();
 		}
 
-		[HttpGet]
+		[HttpGet("{id}")]
 		public Armor Read(int id)//works
 		{
 			return this.logic.Read(id);
@@ -39,20 +39,20 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			this.logic.Update(value);
 		}
 
-		[HttpDelete]
+		[HttpDelete("{id}")]
 		public void Delete(int id) //works
 		{
 			this.logic.Delete(id);
 		}
 		[HttpGet]
-		public IEnumerable<Armor> GetAllJobArmors(string job)
+		public IEnumerable<Armor> GetAllJobArmors(string id)
 		{
-			return this.logic.GetAllJobArmors(job);
+			return this.logic.GetAllJobArmors(id);
 		}
 		[HttpGet]
-		public double? GetAverageDefenceByClass(string jobname)
+		public double? GetAverageDefenceByClass(string id)
 		{
-			return this.logic.GetAverageDefenceByClass(jobname);
+			return this.logic.GetAverageDefenceByClass(id);
 		}
 		[HttpGet]
 		public double? GetAverageDefence()

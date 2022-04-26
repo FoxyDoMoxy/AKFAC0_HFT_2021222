@@ -20,6 +20,9 @@ namespace AKFAC0_HFT_2021222.Test
 		ArmorLogic ArmorLogic;
 		Mock<IRepository<Armor>> mockArmorRepo;
 
+		JobLogic joblogic;
+		Mock<IRepository<Job>> mockJobRepo;
+
 		[SetUp]
 		public void Init()
 		{
@@ -28,12 +31,23 @@ namespace AKFAC0_HFT_2021222.Test
 			mockArmorRepo.Setup(mr => mr.ReadAll()).Returns(new List<Armor>()
 			{
 				new Armor("AAAA",100,1),
-				new Armor("BBBB",100,1),
+				new Armor("BBBB",100,2),
 				new Armor("CCCC",1000,1),
-				new Armor("DDDD",0,1),
+				new Armor("DDDD",0,2),
 			}.AsQueryable());
 
 			ArmorLogic = new ArmorLogic(mockArmorRepo.Object);
+
+			mockJobRepo = new Mock<IRepository<Job>>();
+			mockJobRepo.Setup(mr => mr.ReadAll()).Returns(new List<Job>()
+			{
+				new Job(0,"AAAA","TANK"),
+				new Job(1,"BBBB","HEALER"),
+				new Job(2,"CCCC","DPS"),
+				new Job(3,"DDDD","DPS"),
+			}.AsQueryable());
+
+			joblogic = new JobLogic(mockJobRepo.Object);
 
 		}
 
@@ -114,6 +128,19 @@ namespace AKFAC0_HFT_2021222.Test
 			//Assert
 
 			Assert.That(result, Is.EqualTo(expected));
+		}
+		[Test]
+		public void GetAverageDefenseByClassTest()
+		{
+
+			var asd = joblogic.Read(2).Name;
+			//var result = ArmorLogic.GetAverageDefenceByClass(joblogic.Read(2).Name);
+
+			double expected = 300;
+
+			//Assert
+
+			Assert.That(asd, Is.EqualTo("CCCC"));
 		}
 	}
 }
