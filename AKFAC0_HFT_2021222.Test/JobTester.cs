@@ -22,11 +22,20 @@ namespace AKFAC0_HFT_2021222.Test
         [SetUp]
         public void Init()
         {
-            //ARRANGE
-            mockJobRepo = new Mock<IRepository<Job>>();
+			//ARRANGE
+
+			Weapon wep1 = new Weapon("Wep1", 10, 0);
+			Weapon wep2 = new Weapon("Wep2", 100, 0);
+			Weapon wep3 = new Weapon("Wep2", 100, 1);
+
+			Job A = new Job(0, "AAAA", "TANK");
+			A.Weapons.Add(wep1);
+			A.Weapons.Add(wep2);
+
+			mockJobRepo = new Mock<IRepository<Job>>();
             mockJobRepo.Setup(mr => mr.ReadAll()).Returns(new List<Job>()
             {
-                new Job(0,"AAAA","TANK"),
+                A,
                 new Job(1,"BBBB","HEALER"),
                 new Job(2,"CCCC","DPS"),
                 new Job(3,"DDDD","DPS"),
@@ -37,6 +46,7 @@ namespace AKFAC0_HFT_2021222.Test
         }
 
 		//create test
+
 		[Test]
 		public void CreateJobTestWithCorrectRole()
 		{
@@ -100,6 +110,19 @@ namespace AKFAC0_HFT_2021222.Test
 			//ASSERT
 			mockJobRepo.Verify(r => r.Create(job), Times.Never);
 
+		}
+
+		[Test]
+		public void GetAllWeaponByRoleTest()
+		{
+			//Act
+
+			var result = joblogic.GetAllWeaponByRole("TANK").ToArray();
+
+
+			//Assert
+
+			Assert.That(result[0].Name == "Wep1" && result[1].Name == "Wep2");
 		}
 
 	}

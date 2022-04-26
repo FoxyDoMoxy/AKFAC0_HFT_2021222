@@ -20,14 +20,17 @@ namespace AKFAC0_HFT_2021222.Test
 		[SetUp]
 		public void Init()
 		{
+			Job job1 = new Job(0, "job1", "TANK");
+			Job job2 = new Job(1, "job2", "HEALER");
+
 			//ARRANGE
 			mockWeaponRepo = new Mock<IRepository<Weapon>>();
 			mockWeaponRepo.Setup(mr => mr.ReadAll()).Returns(new List<Weapon>()
 			{
-				new Weapon("AAAA",100,1),
-				new Weapon("BBBB",100,1),
-				new Weapon("CCCC",1000,1),
-				new Weapon("DDDD",0,1),
+				new Weapon("AAAA",100,0,job1),
+				new Weapon("BBBB",200,0,job1),
+				new Weapon("CCCC",1000,1,job2),
+				new Weapon("DDDD",0,1,job2),
 			}.AsQueryable());
 
 			WeaponLogic = new WeaponLogic(mockWeaponRepo.Object);
@@ -36,7 +39,24 @@ namespace AKFAC0_HFT_2021222.Test
 
 		//create test
 		[Test]
-		public void CreateArmorTestWithCorrectName()
+		public void CreateWeaponTestWithNull()
+		{
+			var weapon = new Weapon();
+			//ACT
+			try
+			{
+				WeaponLogic.Create(weapon);
+			}
+			catch
+			{
+			}
+
+			//ASSERT
+			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Never);
+
+		}
+		[Test]
+		public void CreateWeaponTestWithCorrectName()
 		{
 			var weapon = new Weapon() { Name = "Test Mage" };
 			//ACT
@@ -48,7 +68,7 @@ namespace AKFAC0_HFT_2021222.Test
 		}
 
 		[Test]
-		public void CreateArmorTestWithInCorrectName()
+		public void CreateWeaponTestWithInCorrectName()
 		{
 			var weapon = new Weapon() { Name = "?:asdds" };
 			//ACT
@@ -69,7 +89,7 @@ namespace AKFAC0_HFT_2021222.Test
 
 
 		[Test]
-		public void CreateArmorTestWithCorrectLenghtName()
+		public void CreateWeaponTestWithCorrectLenghtName()
 		{
 			var weapon = new Weapon() { Name = "VAlamiii" };
 			//ACT
@@ -81,7 +101,7 @@ namespace AKFAC0_HFT_2021222.Test
 		}
 
 		[Test]
-		public void CreateArmorTestWithInCorrectLenghtName()
+		public void CreateWeaponTestWithInCorrectLenghtName()
 		{
 			var weapon = new Weapon() { Name = "a" };
 			//ACT
@@ -104,9 +124,23 @@ namespace AKFAC0_HFT_2021222.Test
 		[Test]
 		public void GetAverageDamageTest()
 		{
+
 			var result = WeaponLogic.GetAverageDamage();
 
-			double expected = 300;
+			double expected = 325;
+
+			//Assert
+
+			Assert.That(result, Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void GetAverageDamageByClassTest()
+		{
+
+			var result = WeaponLogic.GetAverageDamageByClass("job1");
+
+			double expected = 150;
 
 			//Assert
 

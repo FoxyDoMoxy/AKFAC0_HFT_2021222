@@ -20,38 +20,47 @@ namespace AKFAC0_HFT_2021222.Test
 		ArmorLogic ArmorLogic;
 		Mock<IRepository<Armor>> mockArmorRepo;
 
-		JobLogic joblogic;
-		Mock<IRepository<Job>> mockJobRepo;
 
 		[SetUp]
 		public void Init()
 		{
 			//ARRANGE
+
+			Job job1 = new Job(0, "job1", "TANK");
+			Job job2 = new Job(1, "job2", "HEALER");
+
 			mockArmorRepo = new Mock<IRepository<Armor>>();
 			mockArmorRepo.Setup(mr => mr.ReadAll()).Returns(new List<Armor>()
 			{
-				new Armor("AAAA",100,1),
-				new Armor("BBBB",100,2),
-				new Armor("CCCC",1000,1),
-				new Armor("DDDD",0,2),
+				new Armor("AAAA",100,0,job1),
+				new Armor("BBBB",200,0,job1),
+				new Armor("CCCC",1000,1,job2),
+				new Armor("DDDD",0,1,job2),
 			}.AsQueryable());
 
 			ArmorLogic = new ArmorLogic(mockArmorRepo.Object);
 
-			mockJobRepo = new Mock<IRepository<Job>>();
-			mockJobRepo.Setup(mr => mr.ReadAll()).Returns(new List<Job>()
-			{
-				new Job(0,"AAAA","TANK"),
-				new Job(1,"BBBB","HEALER"),
-				new Job(2,"CCCC","DPS"),
-				new Job(3,"DDDD","DPS"),
-			}.AsQueryable());
-
-			joblogic = new JobLogic(mockJobRepo.Object);
 
 		}
 
 		//create test
+		[Test]
+		public void CreateArmorTestWithNull()
+		{
+			var armor = new Armor();
+			//ACT
+			try
+			{
+				ArmorLogic.Create(armor);
+			}
+			catch
+			{
+			}
+
+			//ASSERT
+			mockArmorRepo.Verify(r => r.Create(armor), Times.Never);
+
+		}
 		[Test]
 		public void CreateArmorTestWithCorrectName()
 		{
@@ -123,7 +132,7 @@ namespace AKFAC0_HFT_2021222.Test
 		{
 			var result = ArmorLogic.GetAverageDefence();
 
-			double expected = 300;
+			double expected = 325;
 
 			//Assert
 
@@ -133,14 +142,21 @@ namespace AKFAC0_HFT_2021222.Test
 		public void GetAverageDefenseByClassTest()
 		{
 
-			var asd = joblogic.Read(2).Name;
-			//var result = ArmorLogic.GetAverageDefenceByClass(joblogic.Read(2).Name);
+			var result = ArmorLogic.GetAverageDefenceByClass("job1");
 
-			double expected = 300;
+			double expected = 150;
 
 			//Assert
 
-			Assert.That(asd, Is.EqualTo("CCCC"));
+			Assert.That(result, Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void GetAllJobArmors()
+		{
+			var result = ArmorLogic.GetAllJobArmors("job1").ToArray();
+
+			Assert.That(result[0].Name == "AAAA" && result[1].Name == "BBBB"&&result.Length==2);
 		}
 	}
 }
