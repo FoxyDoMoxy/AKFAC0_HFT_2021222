@@ -63,7 +63,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 		// Non crud
 
-		// Returns all armor of the specific job by name (többtáblás)
+		// Returns all armor of the specific job by name (többtáblás) (pl : Paladin)
 		public IEnumerable<Armor> GetAllJobArmors(string job)
 		{
 			return from x in this.repo.ReadAll()
@@ -76,7 +76,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 				   };
 		}
 
-		// Returns the average defense of a specific job's armors. (többtáblás)
+		// Returns the average defense of a specific job's armors. (többtáblás) (pl : Paladin)
 		public double? GetAverageDefenceByClass(string jobname)
 		{
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDefense);

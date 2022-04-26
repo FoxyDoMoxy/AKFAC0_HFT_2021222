@@ -62,7 +62,7 @@ namespace AKFAC0_HFT_2021222.Logic
 
 		// Non crud
 
-		// Gives back all Jobs of the given role. (Nem többtáblás)
+		// Gives back all Jobs of the given role. (Nem többtáblás) (pl : TANK)
 		public IEnumerable<Job> GetAllJobsByRole(string id) 
 		{
 			return from x in this.repo.ReadAll()
@@ -77,8 +77,8 @@ namespace AKFAC0_HFT_2021222.Logic
 				   };
 		}
 
-		//Gives back a collection of weapons belonging to a given role. (többtáblás)
-		public IEnumerable<Weapon> GetAllWeaponByRole(string id)
+		//Gives back a collection of weapons belonging to a given role. (többtáblás) (pl : TANK)
+		public IEnumerable<Weapon> GetAllWeaponByRole(string id) 
 		{
 			return (from x in this.repo.ReadAll()
 					where x.Role == id
@@ -86,7 +86,7 @@ namespace AKFAC0_HFT_2021222.Logic
 
 		}
 
-		//Read the name maybe?? lol (többtáblás)
+		//Read the name maybe?? lol (többtáblás) (pl : TANK, 115)
 		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string id, int dmg)
 		{
 
@@ -99,7 +99,7 @@ namespace AKFAC0_HFT_2021222.Logic
 
 		}
 
-		// Name says it all  (többtáblás)
+		// Name says it all  (többtáblás) (pl : TANK)
 		public Weapon GetHighestDMGWeaponGivenRole(string role)
 		{
 

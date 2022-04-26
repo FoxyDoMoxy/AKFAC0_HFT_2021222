@@ -64,7 +64,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		// Non crud
 
 
-		// Returns all weapons of the specific job by name (többtáblás)
+		// Returns all weapons of the specific job by name (többtáblás) (pl : Paladin)
 		public IEnumerable<Weapon> GetAllJobWeapons(string job) 
 		{
 			return from x in this.repo.ReadAll()
@@ -77,7 +77,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 				   };
 		}
 
-		// Returns the average DMG of a specific job's weapons. (többtáblás)
+		// Returns the average DMG of a specific job's weapons. (többtáblás) (pl : Paladin)
 		public double? GetAverageDamageByClass(string jobname)
 		{
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDamage);
