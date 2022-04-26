@@ -8,7 +8,7 @@ namespace AKFAC0_HFT_2021222.Client
 	internal class Program
 	{
         static RestService rest;
-		#region wip
+		#region Menu->Api calls
 		static void Create(string entity) //All good
 		{
 			switch (entity)
@@ -266,6 +266,7 @@ namespace AKFAC0_HFT_2021222.Client
 		{
 			rest = new RestService("http://localhost:30703/", "job");
 
+			#region Menu
 			var jobSubMenu = new ConsoleMenu(args, level: 1)
 				 .Add("List", () => List("Job"))
 				 .Add("Create", () => Create("Job"))
@@ -304,7 +305,7 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("Exit", ConsoleMenu.Close);
 
 			menu.Show();
-
+			#endregion
 		}
 	}
 }
