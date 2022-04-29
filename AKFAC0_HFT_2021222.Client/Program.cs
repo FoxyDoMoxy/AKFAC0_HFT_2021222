@@ -203,8 +203,11 @@ namespace AKFAC0_HFT_2021222.Client
 
 							Console.WriteLine("Give a role name:");
 							string role4 = Console.ReadLine();
-							Weapon weapons4 = rest.GetSingle<Weapon>(role4, "job/GetHighestDMGWeaponGivenRole");
-							Console.WriteLine(weapons4.Name+"\t"+weapons4.BaseDamage+"\t"+weapons4.Job.Name);
+							List<Weapon> weapons4 = rest.Get<Weapon>(role4, "job/GetHighestDMGWeaponGivenRole");
+							foreach (var item in weapons4)
+							{
+								Console.WriteLine(item.Name + ": " + item.BaseDamage + "\n");
+							}
 							break;
 					}
 
@@ -283,6 +286,7 @@ namespace AKFAC0_HFT_2021222.Client
 					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
 					 config.ItemForegroundColor = ConsoleColor.Gray;
 					 config.Title = "Job menu";
+					 config.Selector = "|--->>";
 				 });
 
 			var weaponSubMenu = new ConsoleMenu(args, level: 1)
@@ -300,6 +304,7 @@ namespace AKFAC0_HFT_2021222.Client
 					 config.ItemForegroundColor = ConsoleColor.Gray;
 					 config.Title = "Weapon menu";
 					 config.EnableBreadcrumb = true;
+					 config.Selector = "|--->>";
 				 });
 
 			var armorSubMenu = new ConsoleMenu(args, level: 1)
@@ -317,6 +322,7 @@ namespace AKFAC0_HFT_2021222.Client
 					 config.ItemForegroundColor = ConsoleColor.Gray;
 					 config.Title = "Armor menu";
 					 config.EnableBreadcrumb = true;
+					 config.Selector = "|--->>";
 				 });
 
 			var menu = new ConsoleMenu(args, level: 0)
@@ -330,6 +336,7 @@ namespace AKFAC0_HFT_2021222.Client
 					 config.ItemForegroundColor = ConsoleColor.Gray;
 					 config.Title = "Main menu";
 					 config.EnableBreadcrumb = true;
+					 config.Selector= "|--->>";
 					 });
 
 			menu.Show();

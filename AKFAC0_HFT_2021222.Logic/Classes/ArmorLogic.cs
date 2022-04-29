@@ -17,22 +17,30 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 		public void Create(Armor item)
 		{
-			if (item.Name == "" && item.Name == null)
+			try
 			{
-				throw new ArgumentNullException("Armor name cant be null");
-			}
-			else
-			{
-				if (item.Name.Length < 3)
+				if (item.Name == null)
 				{
-					throw new ArgumentException("Armor name is too short");
-				}
-				else if (item.Name.Contains('?'))
-				{
-
+					throw new ArgumentNullException("Armor name cant be null");
 				}
 				else
-					this.repo.Create(item);
+				{
+					if (item.Name.Length < 3)
+					{
+						throw new ArgumentException("Armor name is too short");
+					}
+					else if (item.Name.Contains('?'))
+					{
+
+					}
+					else
+					{
+						this.repo.Create(item);
+					}
+				}
+			}
+			catch (AggregateException)
+			{
 			}
 		}
 
@@ -43,12 +51,12 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 		public Armor Read(int id)
 		{
-			var job = this.repo.Read(id);
-			if (job == null)
+			var armor = this.repo.Read(id);
+			if (armor == null)
 			{
-				throw new ArgumentNullException("This job does not exist");
+				throw new ArgumentNullException("This armor does not exist");
 			}
-			return job;
+			return armor;
 		}
 
 		public IEnumerable<Armor> ReadAll()

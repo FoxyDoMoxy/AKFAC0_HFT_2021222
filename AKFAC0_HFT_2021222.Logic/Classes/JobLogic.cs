@@ -23,16 +23,23 @@ namespace AKFAC0_HFT_2021222.Logic
 				"HEALER",
 				"DPS"
 			};
-			if (!accepted.Contains(item.Role.ToUpper()) )
+			try
 			{
-				throw new ArgumentException("Job doesnt appeal to the requements");
+				if (!accepted.Contains(item.Role.ToUpper()))
+				{
+					throw new ArgumentException("Job doesnt appeal to the requements");
+				}
+				else if (item.Name.Length < 3)
+				{
+					throw new ArgumentException("Job name is too short");
+				}
+				else { this.repo.Create(item); }
 			}
-			else if (item.Name.Length < 3)
+			catch (Exception)
 			{
-				throw new ArgumentException("Job name is too short");
+				
 			}
-			else
-				this.repo.Create(item);
+
 		}
 
 		public void Delete(int id)
@@ -100,14 +107,14 @@ namespace AKFAC0_HFT_2021222.Logic
 		}
 
 		// Name says it all  (többtáblás) (pl : TANK)
-		public Weapon GetHighestDMGWeaponGivenRole(string role)
+		public IEnumerable<Weapon> GetHighestDMGWeaponGivenRole(string role)
 		{
-
+			var max = repo.ReadAll().Where(x=>x.Role == role).SelectMany(x=>x.Weapons.Select(y=>y.BaseDamage)).Max();
 			var res = repo
 				.ReadAll()
 				.Where(x => x.Role == role)
-				.SelectMany(y => y.Weapons.Where(v => v.BaseDamage.Equals(y.Weapons.Max(d =>d.BaseDamage))))
-				.Select(x => x).OrderByDescending(y => y.BaseDamage).First();
+				.Select(v=>v.Weapons.Where(d=>d.BaseDamage == max))
+				.SelectMany(x => x).OrderByDescending(y => y.BaseDamage);
 			return res;
 
 		}

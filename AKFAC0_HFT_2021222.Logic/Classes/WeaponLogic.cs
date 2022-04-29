@@ -17,23 +17,33 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 		public void Create(Weapon item)
 		{
-			if (item.Name==""&& item.Name==null)
+			try
 			{
-				throw new ArgumentNullException("Weapon name cant be null");
-			}
-			else
-			{
-				if (item.Name.Length < 3)
+				if (item.Name == "" && item.Name == null)
 				{
-					throw new ArgumentException("Weapon name is too short");
-				}
-				else if (item.Name.Contains('?'))
-				{
-
+					throw new ArgumentNullException("Weapon name cant be null");
 				}
 				else
-					this.repo.Create(item);
+				{
+					if (item.Name.Length < 3)
+					{
+						throw new ArgumentException("Weapon name is too short");
+					}
+					else if (item.Name.Contains('?'))
+					{
+
+					}
+					else
+						this.repo.Create(item);
+
+				}
 			}
+			catch (AggregateException)
+			{
+
+				throw;
+			}
+
 		}
 
 		public void Delete(int id)
@@ -43,12 +53,13 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 		public Weapon Read(int id)
 		{
-			var job = this.repo.Read(id);
-			if (job == null)
+			var weapon = this.repo.Read(id);
+			if (weapon == null)
 			{
-				throw new ArgumentNullException("This job does not exist");
+
+				throw new ArgumentNullException("This weapon does not exist");
 			}
-			return job;
+			return weapon;
 		}
 
 		public IEnumerable<Weapon> ReadAll()
@@ -80,6 +91,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		// Returns the average DMG of a specific job's weapons. (többtáblás) (pl : Paladin)
 		public double? GetAverageDamageByClass(string jobname)
 		{
+
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDamage);
 		}
 

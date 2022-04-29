@@ -17,6 +17,6 @@ namespace AKFAC0_HFT_2021222.Logic
 		public IEnumerable<Job> GetAllJobsByRole(string role);
 		public IEnumerable<Weapon> GetAllWeaponByRole(string role);//(többtáblás)
 		public IEnumerable<Weapon> GetAllWeaponByRoleMinimumDmg(string role, int dmg);//(többtáblás)
-		public Weapon GetHighestDMGWeaponGivenRole(string role); //(többtáblás)
+		public IEnumerable<Weapon> GetHighestDMGWeaponGivenRole(string role); //(többtáblás)
 	}
 }

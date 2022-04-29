@@ -61,7 +61,7 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			return this.logic.GetAllWeaponByRoleMinimumDmg(id, dmg);
 		}
 		[HttpGet("GetHighestDMGWeaponGivenRole")]
-		public Weapon GetHighestDMGWeaponGivenRole(string id)
+		public IEnumerable<Weapon> GetHighestDMGWeaponGivenRole(string id)
 		{
 			return this.logic.GetHighestDMGWeaponGivenRole(id);
 		}

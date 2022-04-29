@@ -39,7 +39,7 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			this.logic.Update(value);
 		}
 
-		[HttpDelete]
+		[HttpDelete("{id}")]
 		public void Delete(int id) //works
 		{
 			this.logic.Delete(id);

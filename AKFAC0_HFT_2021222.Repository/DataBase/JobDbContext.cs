@@ -82,8 +82,8 @@ namespace AKFAC0_HFT_2021222.Repository
 
 			modelBuilder.Entity<Weapon>().HasData(new Weapon[]
 			{
-				new Weapon(1,"Radiant’s Bastard Sword & Shield",117,1),
-				new Weapon(2,"Asphodelos Longsword & Shield",117,1),
+				new Weapon(1,"Radiant’s Bastard Sword & Shield",130,1),
+				new Weapon(2,"Asphodelos Longsword & Shield",130,1),
 				new Weapon(3,"Skullrender",101,2),
 				new Weapon(4,"Greatsword of Divine Light",115,3),
 				new Weapon(5,"Chaosbringer",111,3),
