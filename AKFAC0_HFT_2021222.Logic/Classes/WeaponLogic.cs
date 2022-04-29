@@ -89,7 +89,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 
 		// Returns the average DMG of a specific job's weapons. (többtáblás) (pl : Paladin)
-		public double? GetAverageDamageByClass(string jobname)
+		public double? GetAverageDamageByJob(string jobname)
 		{
 
 			return this.repo.ReadAll().Where(x => x.Job.Name.Equals(jobname)).Average(x => x.BaseDamage);

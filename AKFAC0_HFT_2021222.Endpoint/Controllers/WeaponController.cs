@@ -50,9 +50,9 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			return this.logic.GetAllJobWeapons(id);
 		}
 		[HttpGet]
-		public double? GetAverageDamageByClass(string id)
+		public double? GetAverageDamageByJob(string id)
 		{
-			return this.logic.GetAverageDamageByClass(id);
+			return this.logic.GetAverageDamageByJob(id);
 		}
 		[HttpGet]
 		public double? GetAverageDamage()

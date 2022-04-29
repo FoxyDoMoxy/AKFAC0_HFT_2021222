@@ -138,7 +138,7 @@ namespace AKFAC0_HFT_2021222.Test
 		public void GetAverageDamageByClassTest()
 		{
 
-			var result = WeaponLogic.GetAverageDamageByClass("job1");
+			var result = WeaponLogic.GetAverageDamageByJob("job1");
 
 			double expected = 150;
 
