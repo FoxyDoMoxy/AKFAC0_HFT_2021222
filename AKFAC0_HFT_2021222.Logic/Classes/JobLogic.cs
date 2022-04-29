@@ -50,7 +50,7 @@ namespace AKFAC0_HFT_2021222.Logic
 			return job;
 		}
 
-		public IQueryable<Job> ReadAll()
+		public IEnumerable<Job> ReadAll()
 		{
 			return this.repo.ReadAll();
 		}

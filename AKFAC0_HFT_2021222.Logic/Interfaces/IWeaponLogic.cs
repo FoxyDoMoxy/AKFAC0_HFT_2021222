@@ -9,7 +9,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		void Create(Weapon item);
 		void Delete(int id);
 		Weapon Read(int id);
-		IQueryable<Weapon> ReadAll();
+		IEnumerable<Weapon> ReadAll();
 		void Update(Weapon item);
 
 		// non cruds

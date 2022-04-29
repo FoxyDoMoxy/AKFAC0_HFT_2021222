@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using AKFAC0_HFT_2021222.Models;
 using ConsoleTools;
 
@@ -276,7 +277,13 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAllWeaponByRole", () => NonCRUD("Job", "GetAllWeaponByRole"))
 				 .Add("GetAllWeaponByRoleMinimumDmg", () => NonCRUD("Job", "GetAllWeaponByRoleMinimumDmg"))
 				 .Add("GetHighestDMGWeaponGivenRole", () => NonCRUD("Job", "GetHighestDMGWeaponGivenRole"))
-				 .Add("Exit", ConsoleMenu.Close);
+				 .Add("Exit", ConsoleMenu.Close)
+				 .Configure(config => {
+					 config.SelectedItemForegroundColor = ConsoleColor.White;
+					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
+					 config.ItemForegroundColor = ConsoleColor.Gray;
+					 config.Title = "Job menu";
+				 });
 
 			var weaponSubMenu = new ConsoleMenu(args, level: 1)
 				 .Add("List", () => List("Weapon"))
@@ -286,7 +293,14 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAllJobWeapons", () => NonCRUD("Weapon", "GetAllJobWeapons"))
 				 .Add("GetAverageDamageByClass", () => NonCRUD("Weapon", "GetAverageDamageByClass"))
 				 .Add("GetAverageDamage", () => NonCRUD("Weapon", "GetAverageDamage"))
-				 .Add("Exit", ConsoleMenu.Close);
+				 .Add("Exit", ConsoleMenu.Close)
+				 .Configure(config => {
+					 config.SelectedItemForegroundColor = ConsoleColor.White;
+					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
+					 config.ItemForegroundColor = ConsoleColor.Gray;
+					 config.Title = "Weapon menu";
+					 config.EnableBreadcrumb = true;
+				 });
 
 			var armorSubMenu = new ConsoleMenu(args, level: 1)
 				 .Add("List", () => List("Armor"))
@@ -296,13 +310,27 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAllJobArmors", () => NonCRUD("Armor", "GetAllJobArmors"))
 				 .Add("GetAverageDefenceByClass", () => NonCRUD("Armor", "GetAverageDefenceByClass"))
 				 .Add("GetAverageDefence", () => NonCRUD("Armor", "GetAverageDefence"))
-				 .Add("Exit", ConsoleMenu.Close);
+				 .Add("Exit", ConsoleMenu.Close)
+				 .Configure(config => {
+					 config.SelectedItemForegroundColor = ConsoleColor.White;
+					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
+					 config.ItemForegroundColor = ConsoleColor.Gray;
+					 config.Title = "Armor menu";
+					 config.EnableBreadcrumb = true;
+				 });
 
 			var menu = new ConsoleMenu(args, level: 0)
 				 .Add("Jobs", () => jobSubMenu.Show())
 				 .Add("Weapons", () => weaponSubMenu.Show())
 				 .Add("Armors", () => armorSubMenu.Show())
-				 .Add("Exit", ConsoleMenu.Close);
+				 .Add("Exit", ConsoleMenu.Close)
+				 .Configure(config => { 
+					 config.SelectedItemForegroundColor = ConsoleColor.White;
+					 config.SelectedItemBackgroundColor = ConsoleColor.Blue; 
+					 config.ItemForegroundColor = ConsoleColor.Gray;
+					 config.Title = "Main menu";
+					 config.EnableBreadcrumb = true;
+					 });
 
 			menu.Show();
 			#endregion

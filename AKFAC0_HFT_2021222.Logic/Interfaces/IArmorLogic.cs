@@ -9,7 +9,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		void Create(Armor item);
 		void Delete(int id);
 		Armor Read(int id);
-		IQueryable<Armor> ReadAll();
+		IEnumerable<Armor> ReadAll();
 		void Update(Armor item);
 
 		// non cruds

@@ -51,7 +51,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 			return job;
 		}
 
-		public IQueryable<Weapon> ReadAll()
+		public IEnumerable<Weapon> ReadAll()
 		{
 			return this.repo.ReadAll();
 		}

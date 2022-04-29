@@ -9,7 +9,7 @@ namespace AKFAC0_HFT_2021222.Logic
 		void Create(Job item);
 		void Delete(int id);
 		Job Read(int id);
-		IQueryable<Job> ReadAll();
+		IEnumerable<Job> ReadAll();
 		void Update(Job item);
 
 		// non cruds
