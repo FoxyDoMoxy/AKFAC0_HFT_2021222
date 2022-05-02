@@ -19,7 +19,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		{
 			try
 			{
-				if (item.Name == null)
+				if (item.Name == "" && item.Name == null)
 				{
 					throw new ArgumentNullException("Armor name cant be null");
 				}
@@ -31,17 +31,23 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 					}
 					else if (item.Name.Contains('?'))
 					{
-
+						throw new ArgumentException("Armor name contains illegal characters");
+					}
+					else if (item.BaseDefense < 0)
+					{
+						throw new ArgumentException("Armor defence is negative.");
 					}
 					else
-					{
 						this.repo.Create(item);
-					}
+
 				}
 			}
 			catch (AggregateException)
 			{
+
+				throw;
 			}
+
 		}
 
 		public void Delete(int id)
@@ -91,9 +97,19 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		}
 
 		//// Returns Average defense of all armor (nem többtáblás)
-		public double? GetAverageDefence()
+		public IEnumerable<KeyValuePair<String,double>> GetAverageDefence()
 		{
-			return this.repo.ReadAll().Average(x => x.BaseDefense);
+
+			var helperq = "Average Defence All Armor";
+
+			var helperq2 = this.repo.ReadAll().Average(x => x.BaseDefense);
+
+			var result = (from x in repo.ReadAll()
+						  select new KeyValuePair<String, double>(helperq, helperq2)).Take(1);
+
+			return result;
+			//return this.repo.ReadAll().Average(x => x.BaseDefense);
+
 		}
 	}
 }

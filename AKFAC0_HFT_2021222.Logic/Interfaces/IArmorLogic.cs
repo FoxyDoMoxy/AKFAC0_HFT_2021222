@@ -15,6 +15,6 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 		// non cruds
 		public IEnumerable<Armor> GetAllJobArmors(string job);//(többtáblás)
 		public double? GetAverageDefenceByClass(string jobname);//(többtáblás)
-		public double? GetAverageDefence();
+		public IEnumerable<KeyValuePair<string,double>> GetAverageDefence();
 	}
 }

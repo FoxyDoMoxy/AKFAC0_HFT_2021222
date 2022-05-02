@@ -31,7 +31,11 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 					}
 					else if (item.Name.Contains('?'))
 					{
-
+						throw new ArgumentException("Weapon name contains illegal characters");
+					}
+					else if (item.BaseDamage < 0)
+					{
+						throw new ArgumentException("Weapon dmg is negative.");
 					}
 					else
 						this.repo.Create(item);
