@@ -70,23 +70,23 @@ namespace AKFAC0_HFT_2021222.Client
             }
             return items;
         }
-        public List<T> Get<T>(string id,string endpoint)///GetAllJobArmors?job=asd
-        {
-            List<T> items = new List<T>();
-            HttpResponseMessage response = client.GetAsync(endpoint+ "?id="+id).GetAwaiter().GetResult();
-            if (response.IsSuccessStatusCode)
-            {
-                items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
-            }
-            else
-            {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
-            }
-            return items;
-        }
+		public List<T> Get<T>(string id, string endpoint)///GetAllJobArmors?job=asd
+		{
+			List<T> items = new List<T>();
+			HttpResponseMessage response = client.GetAsync(endpoint + "?id=" + id).GetAwaiter().GetResult();
+			if (response.IsSuccessStatusCode)
+			{
+				items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+			}
+			else
+			{
+				var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+				throw new ArgumentException(error.Msg);
+			}
+			return items;
+		}
 
-        public List<T> Get<T>(string id,int min, string endpoint)
+		public List<T> Get<T>(string id,int min, string endpoint)
         {
             List<T> items = new List<T>();
             HttpResponseMessage response = client.GetAsync(endpoint+"?id="+id+"&dmg="+min).GetAwaiter().GetResult();

@@ -190,7 +190,7 @@ namespace AKFAC0_HFT_2021222.Client
 						case "GetAllWeaponByRoleMinimumDmg":
 
 							Console.WriteLine("Give a role name:");
-							string role3 = Console.ReadLine(); 
+							string role3 = Console.ReadLine();
 							Console.WriteLine("Give a minimum dmg:");
 							int min = int.Parse(Console.ReadLine());
 							List<Weapon> weapons2 = rest.Get<Weapon>(role3, min, "job/GetAllWeaponByRoleMinimumDmg");
@@ -228,11 +228,11 @@ namespace AKFAC0_HFT_2021222.Client
 							Console.WriteLine("Give a job name:");
 							string role2 = Console.ReadLine();
 							double output = rest.GetSingle<double>(role2, "weapon/GetAverageDamageByClass");
-							Console.WriteLine("Average Damage By Class: "+role2+" "+output);
+							Console.WriteLine("Average Damage By Class: " + role2 + " " + output);
 							break;
 						case "GetAverageDamage":
 							double output2 = rest.GetSingle<double>("weapon/GetAverageDamage");
-							Console.WriteLine("Average Damage : "+ output2);
+							Console.WriteLine("Average Damage : " + output2);
 							break;
 					}
 					break;
@@ -281,7 +281,8 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAllWeaponByRoleMinimumDmg", () => NonCRUD("Job", "GetAllWeaponByRoleMinimumDmg"))
 				 .Add("GetHighestDMGWeaponGivenRole", () => NonCRUD("Job", "GetHighestDMGWeaponGivenRole"))
 				 .Add("Exit", ConsoleMenu.Close)
-				 .Configure(config => {
+				 .Configure(config =>
+				 {
 					 config.SelectedItemForegroundColor = ConsoleColor.White;
 					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
 					 config.ItemForegroundColor = ConsoleColor.Gray;
@@ -298,7 +299,8 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAverageDamageByClass", () => NonCRUD("Weapon", "GetAverageDamageByClass"))
 				 .Add("GetAverageDamage", () => NonCRUD("Weapon", "GetAverageDamage"))
 				 .Add("Exit", ConsoleMenu.Close)
-				 .Configure(config => {
+				 .Configure(config =>
+				 {
 					 config.SelectedItemForegroundColor = ConsoleColor.White;
 					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
 					 config.ItemForegroundColor = ConsoleColor.Gray;
@@ -316,7 +318,8 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("GetAverageDefenceByClass", () => NonCRUD("Armor", "GetAverageDefenceByClass"))
 				 .Add("GetAverageDefence", () => NonCRUD("Armor", "GetAverageDefence"))
 				 .Add("Exit", ConsoleMenu.Close)
-				 .Configure(config => {
+				 .Configure(config =>
+				 {
 					 config.SelectedItemForegroundColor = ConsoleColor.White;
 					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
 					 config.ItemForegroundColor = ConsoleColor.Gray;
@@ -330,14 +333,42 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("Weapons", () => weaponSubMenu.Show())
 				 .Add("Armors", () => armorSubMenu.Show())
 				 .Add("Exit", ConsoleMenu.Close)
-				 .Configure(config => { 
+				 .Configure(config =>
+				 {
 					 config.SelectedItemForegroundColor = ConsoleColor.White;
-					 config.SelectedItemBackgroundColor = ConsoleColor.Blue; 
+					 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
 					 config.ItemForegroundColor = ConsoleColor.Gray;
 					 config.Title = "Main menu";
 					 config.EnableBreadcrumb = true;
-					 config.Selector= "|--->>";
-					 });
+					 config.Selector = "|--->>";
+				 });
+
+			//var menu2 = new ConsoleMenu(args, level: 0)
+			//	.Add("Weapon List", () => List("Weapon"))
+			//	.Add("Weapon Create", () => Create("Weapon"))
+			//	.Add("Weapon Delete", () => Delete("Weapon"))
+			//	.Add("Weapon Update", () => Update("Weapon"))
+			//	.Add("GetAllJobWeapons", () => NonCRUD("Weapon", "GetAllJobWeapons"))
+			//	.Add("GetAverageDamageByClass", () => NonCRUD("Weapon", "GetAverageDamageByClass"))
+			//	.Add("GetAverageDamage", () => NonCRUD("Weapon", "GetAverageDamage"))
+			//	.Add("Armor List", () => List("Armor"))
+			//	.Add("Armor Create", () => Create("Armor"))
+			//	.Add("Armor Delete", () => Delete("Armor"))
+			//	.Add("Armor Update", () => Update("Armor"))
+			//	.Add("GetAllJobArmors", () => NonCRUD("Armor", "GetAllJobArmors"))
+			//	.Add("GetAverageDefenceByClass", () => NonCRUD("Armor", "GetAverageDefenceByClass"))
+			//	.Add("GetAverageDefence", () => NonCRUD("Armor", "GetAverageDefence"))
+			//	.Add("Exit", ConsoleMenu.Close)
+			//	.Configure(config => {
+			//		 config.SelectedItemForegroundColor = ConsoleColor.White;
+			//		 config.SelectedItemBackgroundColor = ConsoleColor.Blue;
+			//		 config.ItemForegroundColor = ConsoleColor.Gray;
+			//		 config.Title = "Main menu";
+			//		 config.EnableBreadcrumb = true;
+			//		 config.Selector = "|--->>";
+			//		config.EnableFilter = true;
+			//		 });
+
 
 			menu.Show();
 			#endregion
