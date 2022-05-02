@@ -44,95 +44,41 @@ namespace AKFAC0_HFT_2021222.Test
 		}
 
 		//create test
-		[Test]
-		public void CreateArmorTestWithNull()
+
+		[TestCase("villa", 69, true)]
+		[TestCase("kanal", -69, false)]
+		[TestCase("t", 69, false)]
+		[TestCase("Tttt", -69, false)]
+		[TestCase("h?h", 100, false)]
+		[TestCase("", 100, false)]
+		public void CreateWeaponTest(string name, int def, bool shouldRun)
 		{
-			var armor = new Armor();
 			//ACT
-			try
-			{
-				ArmorLogic.Create(armor);
-			}
-			catch
-			{
-			}
+			Armor testarmor = new Armor() { Name = name, BaseDefense = def };
 
 			//ASSERT
-			mockArmorRepo.Verify(r => r.Create(armor), Times.Never);
-
-		}
-		[Test]
-		public void CreateArmorTestWithCorrectName()
-		{
-			var armor = new Armor() { Name = "Test Mage"};
-			//ACT
-			ArmorLogic.Create(armor);
-
-			//ASSERT
-			mockArmorRepo.Verify(r => r.Create(armor), Times.Once);
-
-		}
-
-		[Test]
-		public void CreateArmorTestWithInCorrectName()
-		{
-			var armor = new Armor() { Name = "?:asdds" };
-			//ACT
-			try
+			if (shouldRun)
 			{
-				ArmorLogic.Create(armor);
+				ArmorLogic.Create(testarmor);
+				mockArmorRepo.Verify(cr => cr.Create(testarmor), Times.Once);
 			}
-			catch
+			else
 			{
-
-
+				mockArmorRepo.Verify(cr => cr.Create(testarmor), Times.Never);
 			}
-
-			//ASSERT
-			mockArmorRepo.Verify(r => r.Create(armor), Times.Never);
-
 		}
 
-
-		[Test]
-		public void CreateArmorTestWithCorrectLenghtName()
-		{
-			var armor = new Armor() { Name = "VAlamiii"};
-			//ACT
-			ArmorLogic.Create(armor);
-
-			//ASSERT
-			mockArmorRepo.Verify(r => r.Create(armor), Times.Once);
-
-		}
-
-		[Test]
-		public void CreateArmorTestWithInCorrectLenghtName()
-		{
-			var armor = new Armor() { Name = "a"};
-			//ACT
-			try
-			{
-				
-				ArmorLogic.Create(armor);
-			}
-			catch
-			{
-
-
-			}
-
-			//ASSERT
-			mockArmorRepo.Verify(r => r.Create(armor), Times.Never);
-
-		}
+		
 
 		[Test]
 		public void GetAverageDefenseTest()
 		{
 			var result = ArmorLogic.GetAverageDefence();
 
-			double expected = 325;
+			var expected = new List<KeyValuePair<string, double>>()
+			{
+				new KeyValuePair<string, double>("Average Defence All Armor",325.0)
+			};
 
 			//Assert
 

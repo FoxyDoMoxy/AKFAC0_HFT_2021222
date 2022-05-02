@@ -47,70 +47,27 @@ namespace AKFAC0_HFT_2021222.Test
 
 		//create test
 
-		[Test]
-		public void CreateJobTestWithCorrectRole()
+		[TestCase("Valaki", "TANK", true)]
+		[TestCase("Pista", "versenyautoo", false)]
+		[TestCase("t", "TANK", false)]
+		[TestCase("Pista2", "", false)]
+		public void CreateJobTest(string name, string role, bool shouldRun)
 		{
-			var job = new Job() {Name="Test Mage",Role="DPS" };
 			//ACT
-			joblogic.Create(job);
+			Job testJob = new Job() { Name=name,Role=role};
 
 			//ASSERT
-			mockJobRepo.Verify(r => r.Create(job), Times.Once);
-
+			if (shouldRun)
+			{
+				joblogic.Create(testJob);
+				mockJobRepo.Verify(cr => cr.Create(testJob), Times.Once);
+			}
+			else
+			{
+				mockJobRepo.Verify(cr => cr.Create(testJob), Times.Never);
+			}
 		}
 
-		[Test]
-		public void CreateJobTestWithInCorrectRole()
-		{
-			var job = new Job() { Name = "Test Mage", Role = "Student" };
-			//ACT
-			try
-			{
-				joblogic.Create(job);
-			}
-			catch
-			{
-
-	
-			}
-
-			//ASSERT
-			mockJobRepo.Verify(r => r.Create(job), Times.Never);
-
-		}
-
-
-		[Test]
-		public void CreateJobTestWithCorrectLenghtName()
-		{
-			var job = new Job() { Name = "VAlamiii", Role = "DPS" };
-			//ACT
-			joblogic.Create(job);
-
-			//ASSERT
-			mockJobRepo.Verify(r => r.Create(job), Times.Once);
-
-		}
-
-		[Test]
-		public void CreateJobTestWithInCorrectLenghtName()
-		{
-			var job = new Job() { Name = "a", Role = "TANK" };
-			//ACT
-			try
-			{
-				joblogic.Create(job);
-			}
-			catch
-			{
-
-
-			}
-
-			//ASSERT
-			mockJobRepo.Verify(r => r.Create(job), Times.Never);
-
-		}
 
 		[Test]
 		public void GetAllWeaponByRoleTest()

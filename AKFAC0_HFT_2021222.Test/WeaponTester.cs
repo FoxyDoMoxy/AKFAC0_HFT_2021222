@@ -38,88 +38,31 @@ namespace AKFAC0_HFT_2021222.Test
 		}
 
 		//create test
-		[Test]
-		public void CreateWeaponTestWithNull()
+
+		[TestCase("villa", 69, true)]
+		[TestCase("kanal",-69 , false)]
+		[TestCase("t", 69, false)]
+		[TestCase("Tttt", -69, false)]
+		[TestCase("h?h", 100, false)]
+		[TestCase("", 100, false)]
+		public void CreateWeaponTest(string name, int dmg, bool shouldRun)
 		{
-			var weapon = new Weapon();
 			//ACT
-			try
-			{
-				WeaponLogic.Create(weapon);
-			}
-			catch
-			{
-			}
+			Weapon testweapon = new Weapon() { Name = name, BaseDamage = dmg };
 
 			//ASSERT
-			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Never);
-
-		}
-		[Test]
-		public void CreateWeaponTestWithCorrectName()
-		{
-			var weapon = new Weapon() { Name = "Test Mage" };
-			//ACT
-			WeaponLogic.Create(weapon);
-
-			//ASSERT
-			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Once);
-
-		}
-
-		[Test]
-		public void CreateWeaponTestWithInCorrectName()
-		{
-			var weapon = new Weapon() { Name = "?:asdds" };
-			//ACT
-			try
+			if (shouldRun)
 			{
-				WeaponLogic.Create(weapon);
+				WeaponLogic.Create(testweapon);
+				mockWeaponRepo.Verify(cr => cr.Create(testweapon), Times.Once);
 			}
-			catch
+			else
 			{
-
-
+				mockWeaponRepo.Verify(cr => cr.Create(testweapon), Times.Never);
 			}
-
-			//ASSERT
-			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Never);
-
 		}
 
-
-		[Test]
-		public void CreateWeaponTestWithCorrectLenghtName()
-		{
-			var weapon = new Weapon() { Name = "VAlamiii" };
-			//ACT
-			WeaponLogic.Create(weapon);
-
-			//ASSERT
-			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Once);
-
-		}
-
-		[Test]
-		public void CreateWeaponTestWithInCorrectLenghtName()
-		{
-			var weapon = new Weapon() { Name = "a" };
-			//ACT
-			try
-			{
-
-				WeaponLogic.Create(weapon);
-			}
-			catch
-			{
-
-
-			}
-
-			//ASSERT
-			mockWeaponRepo.Verify(r => r.Create(weapon), Times.Never);
-
-		}
+	
 
 		[Test]
 		public void GetAverageDamageTest()
@@ -131,8 +74,7 @@ namespace AKFAC0_HFT_2021222.Test
 
 			//Assert
 
-			Assert.That(result, Is.EqualTo(expected));
-		}
+			Assert.That(result, Is.EqualTo(expected));		}
 
 		[Test]
 		public void GetAverageDamageByClassTest()
