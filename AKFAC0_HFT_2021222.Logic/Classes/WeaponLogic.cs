@@ -101,9 +101,23 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 
 		// Returns Average dmg of all weapon (nem többtáblás)
-		public double? GetAverageDamage()
+		public IEnumerable<KeyValuePair<String, double>> GetAverageDamage()
 		{
-			return this.repo.ReadAll().Average(x => x.BaseDamage);
+
+			var helperq = "Average dmg All weapon";
+
+			var helperq2 = this.repo.ReadAll().Average(x => x.BaseDamage);
+
+			var result = (from x in repo.ReadAll()
+						  select new KeyValuePair<string, double>(helperq, helperq2)).Take(1);
+
+			return result;
+			//return this.repo.ReadAll().Average(x => x.BaseDefense);
+
 		}
+		//public double? GetAverageDamage()
+		//{
+		//	return this.repo.ReadAll().Average(x => x.BaseDamage);
+		
 	}
 }

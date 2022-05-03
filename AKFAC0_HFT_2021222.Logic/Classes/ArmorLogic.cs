@@ -105,7 +105,7 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 			var helperq2 = this.repo.ReadAll().Average(x => x.BaseDefense);
 
 			var result = (from x in repo.ReadAll()
-						  select new KeyValuePair<String, double>(helperq, helperq2)).Take(1);
+						  select new KeyValuePair<string, double>(helperq, helperq2)).Take(1);
 
 			return result;
 			//return this.repo.ReadAll().Average(x => x.BaseDefense);

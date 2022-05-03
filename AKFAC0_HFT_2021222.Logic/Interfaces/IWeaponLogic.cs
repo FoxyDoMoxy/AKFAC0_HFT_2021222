@@ -16,6 +16,6 @@ namespace AKFAC0_HFT_2021222.Logic.Classes
 
 		public IEnumerable<Weapon> GetAllJobWeapons(string job);//(többtáblás)
 		public double? GetAverageDamageByJob(string jobname);//(többtáblás)
-		public double? GetAverageDamage();
+		public IEnumerable<KeyValuePair<string, double>> GetAverageDamage();
 	}
 }
