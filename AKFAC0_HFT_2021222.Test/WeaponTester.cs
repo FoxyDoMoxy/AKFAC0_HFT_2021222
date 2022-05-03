@@ -62,19 +62,22 @@ namespace AKFAC0_HFT_2021222.Test
 			}
 		}
 
-	
+
 
 		[Test]
 		public void GetAverageDamageTest()
 		{
-
 			var result = WeaponLogic.GetAverageDamage();
 
-			double expected = 325;
+			var expected = new List<KeyValuePair<string, double>>()
+			{
+				new KeyValuePair<string, double>("Average dmg All weapon",325.0)
+			};
 
 			//Assert
 
-			Assert.That(result, Is.EqualTo(expected));		}
+			Assert.That(result, Is.EqualTo(expected));
+		}
 
 		[Test]
 		public void GetAverageDamageByClassTest()

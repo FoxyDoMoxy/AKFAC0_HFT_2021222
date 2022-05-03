@@ -12,8 +12,7 @@ namespace AKFAC0_HFT_2021222.Models
 	public class Job : Entity
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]   //Valamiért nem szereti DBseedel :p
-		//[Column("Job_id", TypeName = "int")]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public override int Id { get; set; }
 
 		[Required]

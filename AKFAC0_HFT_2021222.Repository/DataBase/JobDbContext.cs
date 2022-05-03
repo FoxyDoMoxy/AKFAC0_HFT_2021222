@@ -27,11 +27,6 @@ namespace AKFAC0_HFT_2021222.Repository
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				//MDF tesztelő
-				//optionsBuilder
-				//.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Foxy\source\repos\AKFAC0_HFT_2021222\AKFAC0_HFT_2021222.Repository\Job.mdf;Integrated Security=True")
-				//.UseLazyLoadingProxies();
-
 				optionsBuilder
 					.UseInMemoryDatabase("JobDb")
 					.UseLazyLoadingProxies();
