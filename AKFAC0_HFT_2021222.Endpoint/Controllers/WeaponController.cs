@@ -55,7 +55,7 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			return this.logic.GetAverageDamageByJob(id);
 		}
 		[HttpGet]
-		public double? GetAverageDamage()
+		public IEnumerable<KeyValuePair<string, double>> GetAverageDamage()
 		{
 			return this.logic.GetAverageDamage();
 		}

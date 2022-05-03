@@ -55,7 +55,7 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 			return this.logic.GetAverageDefenceByClass(id);
 		}
 		[HttpGet]
-		public double? GetAverageDefence()
+		public IEnumerable<KeyValuePair<string, double>> GetAverageDefence()
 		{
 			return this.logic.GetAverageDefence();
 		}
