@@ -31,7 +31,7 @@ namespace AKFAC0_HFT_2021222.Client
 					rest.Post(new Weapon() { Name = weaponName, BaseDamage = dmg,JobId= weaponJobid }, "weapon/Post");
 					break;
 				case "Armor":
-					Console.Write("Enter Job Name: ");
+					Console.Write("Enter Armor Name: ");
 					string armorName = Console.ReadLine();
 					Console.Write("Enter defense ammount: ");
 					int defense = int.Parse(Console.ReadLine());
@@ -51,21 +51,21 @@ namespace AKFAC0_HFT_2021222.Client
 					List<Job> jobs = rest.Get<Job>("job");
 					foreach (var item in jobs)
 					{
-						Console.WriteLine(item.Name + ": " + item.Role + "\n");
+						Console.WriteLine(item.Id + " - " + item.Name + ": " + item.Role);
 					}
 					break;
 				case "Weapon":
 					List<Weapon> weapons = rest.Get<Weapon>("weapon/ReadAll");
 					foreach (var weapon in weapons)
 					{
-						Console.WriteLine(weapon.Name + ": " + weapon.BaseDamage + "\n Job id: " + weapon.JobId+ "\n");
+						Console.WriteLine(weapon.Id + " - " + weapon.Name + ": " + weapon.BaseDamage + " Job id: " + weapon.JobId);
 					}
 					break;
 				case "Armor":
 					List<Armor> Armors = rest.Get<Armor>("armor/ReadAll");
 					foreach (var armor in Armors)
 					{
-						Console.WriteLine(armor.Name + ": " + armor.BaseDefense + "\n Job id: " + armor.JobId+"\n");
+						Console.WriteLine(armor.Id + " - " + armor.Name + ": " + armor.BaseDefense + " Job id: " + armor.JobId);
 					}
 					break;
 			}
@@ -170,69 +170,71 @@ namespace AKFAC0_HFT_2021222.Client
 					switch (method)
 					{
 						case "GetAllJobsByRole":
-							Console.WriteLine("Give a role name:");
+							Console.WriteLine("Give a role name: (TANK,HEALER,DPS)");
 							string role = Console.ReadLine();
 							List<Job> jobs = rest.Get<Job>(role, "job/GetAllJobsByRole");
 							foreach (var item in jobs)
 							{
-								Console.WriteLine(item.Name + ": " + item.Role + "\n");
+								Console.WriteLine(item.Id+" - "+item.Name + ": " + item.Role + "\n");
 							}
 							break;
 						case "GetAllWeaponByRole":
-							Console.WriteLine("Give a role name:");
+							Console.WriteLine("Give a role name: (TANK,HEALER,DPS)");
 							string role2 = Console.ReadLine();
 							List<Weapon> weapons = rest.Get<Weapon>(role2, "job/GetAllWeaponByRole");
 							foreach (var item in weapons)
 							{
-								Console.WriteLine(item.Name + ": " + item.BaseDamage + "\n");
+								Console.WriteLine(item.Id + " - " + item.Name + ": " + item.BaseDamage + "\n");
 							}
 							break;
 						case "GetAllWeaponByRoleMinimumDmg":
 
-							Console.WriteLine("Give a role name:");
+							Console.WriteLine("Give a role name: (TANK,HEALER,DPS)");
 							string role3 = Console.ReadLine();
-							Console.WriteLine("Give a minimum dmg:");
+							Console.WriteLine("Give a minimum dmg: (example : 125) ");
 							int min = int.Parse(Console.ReadLine());
 							List<Weapon> weapons2 = rest.Get<Weapon>(role3, min, "job/GetAllWeaponByRoleMinimumDmg");
 							foreach (var item in weapons2)
 							{
-								Console.WriteLine(item.Name + ": " + item.BaseDamage + "\n");
+								Console.WriteLine(item.Id + " - " + item.Name + ": " + item.BaseDamage + "\n");
 							}
 							break;
 						case "GetHighestDMGWeaponGivenRole":
 
-							Console.WriteLine("Give a role name:");
+							Console.WriteLine("Give a role name: (TANK,HEALER,DPS) tank = 130 :)");
 							string role4 = Console.ReadLine();
 							List<Weapon> weapons4 = rest.Get<Weapon>(role4, "job/GetHighestDMGWeaponGivenRole");
 							foreach (var item in weapons4)
 							{
-								Console.WriteLine(item.Name + ": " + item.BaseDamage + "\n");
+								Console.WriteLine(item.Id + " - " + item.Name + ": " + item.BaseDamage + "\n");
 							}
 							break;
 					}
-
 					break;
 				case "Weapon":
 					switch (method)
 					{
 						case "GetAllJobWeapons":
-							Console.WriteLine("Give a job name:");
+							Console.WriteLine("Give a job name: (Paladin, White Mage ...)");
 							string role = Console.ReadLine();
 							List<Weapon> jobs = rest.Get<Weapon>(role, "weapon/GetAllJobWeapons");
 							foreach (var item in jobs)
 							{
-								Console.WriteLine(item.Name + ": " + item.BaseDamage + "\n");
+								Console.WriteLine(item.Id + " - " + item.Name + ": " + item.BaseDamage + "\n");
 							}
 							break;
-						case "GetAverageDamageByClass":
-							Console.WriteLine("Give a job name:");
+						case "GetAverageDamageByJob":
+							Console.WriteLine("Give a job name: (Paladin, White Mage ...)");
 							string role2 = Console.ReadLine();
-							double output = rest.GetSingle<double>(role2, "weapon/GetAverageDamageByClass");
+							double output = rest.GetSingle<double>(role2, "weapon/GetAverageDamageByJob");
 							Console.WriteLine("Average Damage By Class: " + role2 + " " + output);
 							break;
 						case "GetAverageDamage":
-							double output2 = rest.GetSingle<double>("weapon/GetAverageDamage");
-							Console.WriteLine("Average Damage : " + output2);
+							var output2 = rest.Get<KeyValuePair<string,double>>("weapon/GetAverageDamage");
+							foreach (var item in output2)
+							{
+								Console.WriteLine(item.Key + " - " + item.Value);
+							}
 							break;
 					}
 					break;
@@ -240,23 +242,26 @@ namespace AKFAC0_HFT_2021222.Client
 					switch (method)
 					{
 						case "GetAllJobArmors":
-							Console.WriteLine("Give a job name:");
+							Console.WriteLine("Give a job name: (Paladin, White Mage ...)");
 							string role = Console.ReadLine();
 							List<Armor> jobs = rest.Get<Armor>(role, "armor/GetAllJobArmors");
 							foreach (var item in jobs)
 							{
-								Console.WriteLine(item.Name + ": " + item.BaseDefense + "\n");
+								Console.WriteLine(item.Id + " - " + item.Name + ": " + item.BaseDefense + "\n");
 							}
 							break;
 						case "GetAverageDefenceByClass":
-							Console.WriteLine("Give a job name:");
+							Console.WriteLine("Give a job name: (Paladin, White Mage ...)");
 							string role2 = Console.ReadLine();
 							double output = rest.GetSingle<double>(role2, "armor/GetAverageDefenceByClass");
 							Console.WriteLine("Average defence By Class: " + role2 + " " + output);
 							break;
 						case "GetAverageDefence":
-							double output2 = rest.GetSingle<double>("armor/GetAverageDefence");
-							Console.WriteLine("Average defence : " + output2);
+							var output2 = rest.Get<KeyValuePair<string, double>>("armor/GetAverageDefence");
+							foreach (var item in output2)
+							{
+								Console.WriteLine(item.Key + " - " + item.Value);
+							}
 							break;
 					}
 					break;
@@ -296,7 +301,7 @@ namespace AKFAC0_HFT_2021222.Client
 				 .Add("Delete", () => Delete("Weapon"))
 				 .Add("Update", () => Update("Weapon"))
 				 .Add("GetAllJobWeapons", () => NonCRUD("Weapon", "GetAllJobWeapons"))
-				 .Add("GetAverageDamageByClass", () => NonCRUD("Weapon", "GetAverageDamageByClass"))
+				 .Add("GetAverageDamageByClass", () => NonCRUD("Weapon", "GetAverageDamageByJob"))
 				 .Add("GetAverageDamage", () => NonCRUD("Weapon", "GetAverageDamage"))
 				 .Add("Exit", ConsoleMenu.Close)
 				 .Configure(config =>
