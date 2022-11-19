@@ -74,6 +74,12 @@ namespace AKFAC0_HFT_2021222.Endpoint
 
 			app.UseRouting();
 
+			app.UseCors(x => x
+			.AllowCredentials()
+			.AllowAnyMethod()
+			.AllowAnyHeader()
+			.WithOrigins("http://localhost:30703/"));
+
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
