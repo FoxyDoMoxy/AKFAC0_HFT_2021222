@@ -10,20 +10,104 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="Jobs">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Jobs}" Grid.Column="0" SelectedItem="{Binding Selectedjob}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Id}"/>
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="{Binding Role}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Bike ID" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding Selectedjob.Id}" IsEnabled="False" Padding="5"/>
+                        <Label Content="Model" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding Selectedjob.Name}" Padding="5"/>
+                        <Label Content="Price" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding Selectedjob.Role}" Padding="5"/>
+                        <Button Content="Create Job" Command="{Binding CreateJobCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Update Job" Command="{Binding UpdateJobCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Delete Job" Command="{Binding DeleteJobCommand}" Margin="10" Padding="10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
 
-        <ListBox ItemsSource="{Binding Jobs}" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1">
-                        <Label Content="{Binding Name}" HorizontalAlignment="Center"/>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
+            <TabItem Header="Armors">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Armors }" Grid.Column="0" SelectedItem="{Binding SelectedArmor}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Id}"/>
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="{Binding BaseDefense}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Armor Id" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedArmor.Id}" IsEnabled="False" Padding="5"/>
+                        <Label Content="Armor Name" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedArmor.Name}" Padding="5"/>
+                        <Label Content="Job User" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedArmor.JobId}" Padding="5"/>
+                        <Label Content="Defence" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedArmor.BaseDefense}" Padding="5"/>
+                        <Button Content="Create Armor" Command="{Binding CreateArmorCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Update Armor" Command="{Binding UpdateArmorCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Delete Armor" Command="{Binding DeleteArmorCommand}" Margin="10" Padding="10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Weapons">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Weapons }" Grid.Column="0" SelectedItem="{Binding SelectedWeapon}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Id}"/>
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="{Binding BaseDamage}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Weapon ID" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedWeapon.Id}" IsEnabled="False" Padding="5"/>
+                        <Label Content="Name" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedWeapon.Name}" Padding="5"/>
+                        <Label Content="Job User" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedWeapon.JobId}" Padding="5"/>
+                        <Label Content="Damage" Background="LightBlue" Padding="5"/>
+                        <TextBox Text="{Binding SelectedWeapon.BaseDamage}" Padding="5"/>
+                        <Button Content="Create Weapon" Command="{Binding CreateWeaponCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Update Weapon" Command="{Binding UpdateWeaponCommand}" Margin="10" Padding="10"/>
+                        <Button Content="Delete Weapon" Command="{Binding DeleteWeaponCommand}" Margin="10" Padding="10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

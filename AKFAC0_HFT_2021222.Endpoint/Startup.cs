@@ -1,3 +1,4 @@
+using AKFAC0_HFT_2021222.Endpoint.Services;
 using AKFAC0_HFT_2021222.Logic;
 using AKFAC0_HFT_2021222.Logic.Classes;
 using AKFAC0_HFT_2021222.Models;
@@ -43,6 +44,8 @@ namespace AKFAC0_HFT_2021222.Endpoint
 			services.AddTransient<IWeaponLogic, WeaponLogic>();
 			services.AddTransient<IArmorLogic, ArmorLogic>();
 
+			services.AddSignalR();
+
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
@@ -76,6 +79,7 @@ namespace AKFAC0_HFT_2021222.Endpoint
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+				endpoints.MapHub<SignalRHub>("/hub");
 			});
 		}
 	}
