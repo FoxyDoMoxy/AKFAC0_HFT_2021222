@@ -78,7 +78,7 @@ namespace AKFAC0_HFT_2021222.Endpoint
 			.AllowCredentials()
 			.AllowAnyMethod()
 			.AllowAnyHeader()
-			.WithOrigins("http://localhost:30703/"));
+			.WithOrigins("http://localhost:51302"));
 
 			app.UseAuthorization();
 
