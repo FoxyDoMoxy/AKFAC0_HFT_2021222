@@ -106,7 +106,7 @@ async function weapongetdata() {
         .then(x => x.json())
         .then(y => {
             weapons = y;
-           // console.log(weapons);
+           //console.log(weapons);
             Weapondisplay();
         });
 }
@@ -140,7 +140,7 @@ function Weapondisplay() {
     weapons.forEach(t => {
         document.getElementById('weaponresultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
-            + t.name + "</td><td>" + 69 + "</td><td>" +
+        + t.name + "</td><td>" + t.baseDamage + "</td><td>" +
             `<button type="button" onclick="weaponremove(${t.id})">Delete</button>` +
             `<button type="button" onclick="weaponshowupdate(${t.id})">Update</button>`
             + "</td></tr>";
@@ -152,7 +152,7 @@ function Armordisplay() {
     armors.forEach(t => {
         document.getElementById('armorresultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
-            + t.name + "</td><td>" +
+            + t.name + "</td><td>" + t.baseDefense + "</td><td>" +
             `<button type="button" onclick="armorremove(${t.id})">Delete</button>` +
             `<button type="button" onclick="armorshowupdate(${t.id})">Update</button>`
             + "</td></tr>";
@@ -173,6 +173,7 @@ function jobcreate() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            jobgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -190,6 +191,7 @@ function weaponcreate() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            weapongetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -207,6 +209,7 @@ function armorcreate() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            armorgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -223,7 +226,7 @@ function jobremove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getdata();
+            jobgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -238,7 +241,7 @@ function weaponremove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getdata();
+            weapongetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -253,7 +256,7 @@ function armorremove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getdata();
+            armorgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 
@@ -262,33 +265,39 @@ function armorremove(id) {
 
 /*Update functions   SOMETHING IS FISHY*/ 
 function jobupdate() {
-    document.getElementById('Jobupdateformdiv').style.display = 'none';
+
     let jobname = document.getElementById('jobnametoupdate').value;
+    let jobrole = document.getElementById('jobroletoupdate').value;
     fetch('http://localhost:30703/job', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: jobname, id: jobIdToUpdate })
+            { name: jobname, id: jobIdToUpdate, role: jobrole })
     })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            jobgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
+
+    document.getElementById('Jobupdateformdiv').style.display = 'none';
 }
 
 function weaponupdate() {
     document.getElementById('weaponupdateformdiv').style.display = 'none';
     let jobname = document.getElementById('weaponnametoupdate').value;
+    let weapondamage = document.getElementById('weapondamagetoupdate').value;
     fetch('http://localhost:30703/weapon', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: jobname, id: weaponIdToUpdate })
+            { name: jobname, id: weaponIdToUpdate, baseDamage: weapondamage })
     })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            weapongetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -296,15 +305,17 @@ function weaponupdate() {
 function armorupdate() {
     document.getElementById('armorupdateformdiv').style.display = 'none';
     let jobname = document.getElementById('armornametoupdate').value;
+    let baseDef = document.getElementById('armordefensetoupdate').value;
     fetch('http://localhost:30703/armor', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: jobname, id: armorIdToUpdate })
+            { name: jobname, id: armorIdToUpdate, baseDefense: baseDef })
     })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
+            armorgetdata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -313,18 +324,21 @@ function armorupdate() {
 /*ShowUpdate functions SOMETHING IS FISHY*/
 function jobshowupdate(id) {
     document.getElementById('jobnametoupdate').value = jobs.find(t => t['id'] == id)['name'];
+    document.getElementById('jobroletoupdate').value = jobs.find(t => t['id'] == id)['role'];
     document.getElementById('Jobupdateformdiv').style.display = 'flex';
     jobIdToUpdate = id;
 }
 
 function weaponshowupdate(id) {
     document.getElementById('weaponnametoupdate').value = weapons.find(t => t['id'] == id)['name'];
+    document.getElementById('weapondamagetoupdate').value = weapons.find(t => t['id'] == id)['baseDamage'];
     document.getElementById('weaponupdateformdiv').style.display = 'flex';
     weaponIdToUpdate = id;
 }
 
 function armorshowupdate(id) {
     document.getElementById('armornametoupdate').value = armors.find(t => t['id'] == id)['name'];
+    document.getElementById('armordefensetoupdate').value = armors.find(t => t['id'] == id)['baseDefense'];
     document.getElementById('armorupdateformdiv').style.display = 'flex';
     armorIdToUpdate = id;
 }
