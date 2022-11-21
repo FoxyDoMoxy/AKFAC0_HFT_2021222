@@ -2,30 +2,98 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Actor UI</title>
+    <title>Job UI</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Job Menu</h1>
+    <h1>Catalog</h1>
+    <button type="button" onclick="showjobs()">Jobs</button>
+    <button type="button" onclick="showweapons()">Weapons</button>
+    <button type="button" onclick="showarmors()">Armors</button>
 
-    <div id="formdiv">
-        <label>Job Name</label>
-        <input type="text" id="jobname" />
-        <button type="button" onclick="create()">Add Job</button>
+    <div id="jobs" style="display:none">
+        <div id="jobformdiv">
+            <label>Job Name</label>
+            <input type="text" id="jobname" />
+            <button type="button" onclick="jobcreate()">Add Job</button>
+        </div>
+        <br />
+        <div id="Jobupdateformdiv" style="display:none">
+            <label>Job Name</label>
+            <input type="text" id="jobnametoupdate" />
+            <button type="button" onclick="jobupdate()">Update Job</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="jobresultarea">
+            </tbody>
+        </table>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="ResultArea">
-        </tbody>
-    </table>
+
+    <div id="weapons" style="display:none">
+        <div id="weaponformdiv">
+            <label>weapon Name</label>
+            <input type="text" id="weaponname" />
+            <button type="button" onclick="weaponcreate()">Add weapon</button>
+        </div>
+        <br />
+        <div id="weaponupdateformdiv" style="display:none">
+            <label>weapon Name</label>
+            <input type="text" id="weaponnametoupdate" />
+            <button type="button" onclick="weaponupdate()">Update weapon</button>
+        </div>
 
 
-    <script src="script.js"></script>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Damage</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="weaponresultarea">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="armors" style="display:none">
+        <div id="armorformdiv">
+            <label>Armor Name</label>
+            <input type="text" id="armorname" />
+            <button type="button" onclick="armorcreate()">Add armor</button>
+        </div>
+        <br />
+        <div id="armorupdateformdiv" style="display:none">
+            <label>armor Name</label>
+            <input type="text" id="armornametoupdate" />
+            <button type="button" onclick="armorupdate()">Update armor</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="armorresultarea">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script1.js"></script>
 </body>
 </html>
