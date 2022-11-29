@@ -19,39 +19,39 @@ function setupSignalR() {
         .build();
 
     connection.on("JobCreated", (user, message) => {
-        getdata();
+        jobgetdata();
     });
 
     connection.on("JobDeleted", (user, message) => {
-        getdata();
+        jobgetdata();
     });
 
     connection.on("JobUpdated", (user, message) => {
-        getdata();
+        jobgetdata();
     });
 
     connection.on("WeaponCreated", (user, message) => {
-        getdata();
+        weapongetdata();
     });
 
     connection.on("WeaponDeleted", (user, message) => {
-        getdata();
+        weapongetdata();
     });
 
     connection.on("WeaponUpdated", (user, message) => {
-        getdata();
+        weapongetdata();
     });
 
     connection.on("ArmorCreated", (user, message) => {
-        getdata();
+        armorgetdata();
     });
 
     connection.on("ArmorDeleted", (user, message) => {
-        getdata();
+        armorgetdata();
     });
 
     connection.on("ArmorUpdated", (user, message) => {
-        getdata();
+        armorgetdata();
     });
     connection.onclose(async () => {
         await start();
