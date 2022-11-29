@@ -29,11 +29,11 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Column="1">
-                        <Label Content="Bike ID" Background="LightBlue" Padding="5"/>
+                        <Label Content="Job ID" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding Selectedjob.Id}" IsEnabled="False" Padding="5"/>
-                        <Label Content="Model" Background="LightBlue" Padding="5"/>
+                        <Label Content="Name" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding Selectedjob.Name}" Padding="5"/>
-                        <Label Content="Price" Background="LightBlue" Padding="5"/>
+                        <Label Content="Role" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding Selectedjob.Role}" Padding="5"/>
                         <Button Content="Create Job" Command="{Binding CreateJobCommand}" Margin="10" Padding="10"/>
                         <Button Content="Update Job" Command="{Binding UpdateJobCommand}" Margin="10" Padding="10"/>

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using AKFAC0_HFT_2021222.Logic.Classes;
 using AKFAC0_HFT_2021222.Models;
 using System.Collections.Generic;
+using AKFAC0_HFT_2021222.Endpoint.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 {
@@ -11,9 +13,11 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 	public class ArmorController : ControllerBase
 	{
 		IArmorLogic logic;
-		public ArmorController(IArmorLogic logic)
+		IHubContext<SignalRHub> hub;
+		public ArmorController(IArmorLogic logic,IHubContext<SignalRHub> hub)
 		{
 			this.logic = logic;
+			this.hub = hub;
 		}
 		[HttpGet]
 		public IEnumerable<Armor> ReadAll() //works kinda?
@@ -31,18 +35,22 @@ namespace AKFAC0_HFT_2021222.Endpoint.Controllers
 		public void Post([FromBody] Armor value)
 		{
 			this.logic.Create(value);
+			this.hub.Clients.All.SendAsync("ArmorCreated", value);
 		}
 
 		[HttpPut]
 		public void Put([FromBody] Armor value)
 		{
 			this.logic.Update(value);
+			this.hub.Clients.All.SendAsync("ArmorUpdated", value);
 		}
 
 		[HttpDelete("{id}")]
 		public void Delete(int id) //works
 		{
+			var armorToDelete = this.logic.Read(id);
 			this.logic.Delete(id);
+			this.hub.Clients.All.SendAsync("ArmorDeleted", armorToDelete);
 		}
 		[HttpGet("{GetAllJobArmors}")]
 		public IEnumerable<Armor> GetAllJobArmors(string id)
